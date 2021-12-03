@@ -1,27 +1,28 @@
 import React from "react";
-//import Header from "./Header";
+import Header from "./Header";
 import ProductList from "./ProductList";
-// import ShoppingCart from "./ShoppingCart";
-//import Footer from "./Footer";
-import initialData from "../datas/initialData";
+import ShoppingCart from "./ShoppingCart";
+import Footer from "./Footer";
+import {useState} from 'react';
 
 
 
-class App extends React.Component{
-    render(){
+
+function App (){
+    const [shoppingCart, updateShoppingCart] = useState([])
         return(
             <div id='root'>
-                {/* <Header/> */}
+                <Header/>
                 <div className='content'>
-                    <ProductList/>
-                    {/* <ShoppingCart/> */}
+                    <ShoppingCart shoppingCart={shoppingCart} updateShoppingCart={updateShoppingCart}/>
+                    <ProductList shoppingCart={shoppingCart} updateShoppingCart={updateShoppingCart}/>
 
                 </div>
-                {/* <Footer/> */}
+                <Footer/>
             </div>
             
         )
     }
-}
+
 
 export default App

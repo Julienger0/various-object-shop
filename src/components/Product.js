@@ -1,21 +1,29 @@
 import React from "react";
 
+function Product ({product,key,shoppingCart,updateShoppingCart}){
 
-class Product extends React.Component{
-    render(){
+    function addToShoppingList(name,price){
+        const currentProductAdded= shoppingCart.find((product)=>product.name===name)
+        if (currentProductAdded){
+            const shoppingCartFilteredCurrentProduct=shoppingCart.filter((product=>product.name!==name))
+            updateShoppingCart([...shoppingCartFilteredCurrentProduct,{name,price,amount:currentProductAdded.amount+1}])
+        }
+        else{
+            updateShoppingCart([...shoppingCart,{name,price,amount:1}])
+        }
+    }
         return(
             <li className='productsheet' >
             
             {/* <img src={`../assets/${this.props.product.id}.png`}/> */}
-            <img src={this.props.product.image}/>
+            <img src={product.image} alt='product' width="200" height="200"/>
             <br/>
-            {this.props.product.name} 
+            {product.name} 
             <br/>
-            {this.props.product.price}€
+            {product.price}€
             <br/>
-            <button> ajouter </button>
+            <button onClick={()=> addToShoppingList(product.name,product.price)}> Ajouter </button>
         </li>
         )
-    }
 }
 export default Product
